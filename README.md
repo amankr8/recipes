@@ -84,6 +84,7 @@ The backend exposes REST endpoints for managing recipes. Example endpoints:
 
 - `GET /api/recipes` — List all recipes
 - `GET /api/recipes/{id}` — Get a recipe by ID
+- `GET /api/recipes/search?query=...` — Search recipes by a query string (recipe name)
 
 ---
 
