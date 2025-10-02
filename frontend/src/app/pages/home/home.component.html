@@ -1,1 +1,115 @@
-<p>home works!</p>
+<div class="p-6 max-w-4xl mx-auto">
+  <h1 class="text-2xl w-full flex justify-center font-bold mb-4 text-gray-800">
+    Recipe List
+  </h1>
+
+  <!-- Search Bar -->
+  <div class="flex items-center gap-2 mb-4">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search by Recipe Name"
+      class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+    <button
+      (click)="searchRecipes()"
+      class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+    >
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <div class="relative" #dropdownRef>
+      <button
+        class="flex items-center justify-between w-36 gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 transition"
+        (click)="showTagDropdown = !showTagDropdown"
+      >
+        {{ selectedTag || "All Tags" }}
+        <i
+          class="fa-solid text-sm text-gray-500"
+          [ngClass]="{
+            'fa-chevron-down': !showTagDropdown,
+            'fa-chevron-up': showTagDropdown
+          }"
+        ></i>
+      </button>
+
+      <div
+        *ngIf="showTagDropdown"
+        class="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-48 overflow-y-auto"
+      >
+        <div
+          (click)="selectedTag = ''; filterByTag(); showTagDropdown = false"
+          class="px-4 py-2 hover:bg-gray-100 text-gray-700 cursor-pointer"
+        >
+          All Tags
+        </div>
+        <div
+          *ngFor="let tag of tags"
+          (click)="selectedTag = tag; filterByTag(); showTagDropdown = false"
+          class="px-4 py-2 hover:bg-gray-100 text-gray-700 cursor-pointer"
+        >
+          {{ tag }}
+        </div>
+      </div>
+    </div>
+
+    <button
+      (click)="sortByCookTime()"
+      class="bg-blue-600 w-25 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center justify-between"
+    >
+      <span>Time</span>
+      <i
+        [class]="
+          sortTimeAsc === null
+            ? 'fa-solid fa-arrows-up-down'
+            : sortTimeAsc
+            ? 'fa-solid fa-arrow-up'
+            : 'fa-solid fa-arrow-down'
+        "
+      ></i>
+    </button>
+
+    <button
+      (click)="resetFilters()"
+      class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition"
+    >
+      Reset
+    </button>
+  </div>
+
+  <!-- Loading and Error -->
+  <div *ngIf="loading" class="text-blue-500">Loading recipes...</div>
+  <div *ngIf="error" class="text-red-500">{{ error }}</div>
+
+  <!-- Recipes Table -->
+  <table
+    *ngIf="!loading && !error"
+    class="min-w-full bg-white shadow-md rounded-lg overflow-hidden"
+  >
+    <thead class="bg-gray-100 text-gray-700 text-left">
+      <tr>
+        <th class="py-3 px-5">ID</th>
+        <th class="py-3 px-5">Name</th>
+        <th class="py-3 px-5">Cuisine</th>
+        <th class="py-3 px-5">Cook Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let recipe of displayedRecipes"
+        class="hover:bg-gray-50 transition-colors duration-200"
+      >
+        <td class="py-3 px-5">{{ recipe.id }}</td>
+        <td class="py-3 px-5">{{ recipe.name }}</td>
+        <td class="py-3 px-5">{{ recipe.cuisine }}</td>
+        <td class="py-3 px-5">{{ recipe.cookTimeMinutes }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div
+    *ngIf="!loading && !error && recipes.length === 0"
+    class="text-gray-500 mt-4"
+  >
+    No recipes found.
+  </div>
+</div>

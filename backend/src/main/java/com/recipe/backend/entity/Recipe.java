@@ -6,6 +6,8 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "recipe")
@@ -23,4 +25,10 @@ public class Recipe {
 
     @Column(name = "r_cuisine")
     private String cuisine;
+
+    @Column
+    private Long cookTimeMinutes;
+
+    @Column
+    private List<String> tags;
 }

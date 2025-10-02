@@ -19,9 +19,9 @@ export class RecipeService {
     return this.http.get<Recipe>(`${this.baseUrl}/${id}`);
   }
 
-  searchRecipes(query: string): Observable<Recipe[]> {
+  searchRecipesByQuery(query: string): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(`${this.baseUrl}/search`, {
-      params: { q: query },
+      params: { query },
     });
   }
 }

@@ -63,6 +63,12 @@ public class RecipeServiceImpl implements RecipeService {
         for (JsonNode recipeNode : recipesNode) {
             Recipe recipe = new Recipe();
             recipe.setName(recipeNode.get("name").asText());
+            recipe.setCookTimeMinutes(recipeNode.get("cookTimeMinutes").asLong());
+            List<String> tags = new ArrayList<>();
+            for (JsonNode tagNode : recipeNode.withArray("tags")) {
+                tags.add(tagNode.asText());
+            }
+            recipe.setTags(tags);
             recipe.setCuisine(recipeNode.get("cuisine").asText());
 
             recipes.add(recipe);
