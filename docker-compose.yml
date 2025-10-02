@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - recipe-service
+
+  recipe-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: recipe_service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - elasticsearch
+
   elasticsearch:
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.17.13'
     container_name: elasticsearch
