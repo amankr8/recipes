@@ -1,10 +1,10 @@
 package com.recipe.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Data;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+
+import jakarta.persistence.*;
 
 @Data
 @Entity
@@ -12,10 +12,15 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 @Indexed(index = "idx_recipe")
 public class Recipe {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "r_id")
     private Long id;
 
     @FullTextField
+    @Column(name = "r_name")
     private String name;
 
+    @Column(name = "r_cuisine")
     private String cuisine;
 }
