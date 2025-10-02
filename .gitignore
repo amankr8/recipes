@@ -1,6 +1,7 @@
 # Ignore logs, build, and IDE stuff
 **/target/
 **/logs/
+.angular/
 .idea/
 .vscode/
 *.iml
@@ -28,3 +29,5 @@ build/
 # Ignore temporary files
 *.tmp
 *.temporary
+
+# Misc
