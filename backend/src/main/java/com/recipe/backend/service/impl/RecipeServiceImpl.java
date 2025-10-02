@@ -2,6 +2,7 @@ package com.recipe.backend.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.recipe.backend.entity.Recipe;
+import com.recipe.backend.exception.ResourceNotFoundException;
 import com.recipe.backend.repository.RecipeRepository;
 import com.recipe.backend.service.RecipeService;
 import jakarta.annotation.PostConstruct;
@@ -83,7 +84,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe getRecipeById(Long id) {
         return recipeRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Recipe not found with id: " + id));
+                new ResourceNotFoundException("Recipe not found with id: " + id));
     }
 
     @Override

@@ -22,14 +22,14 @@ public class RecipeControllerImpl implements RecipeController {
     }
 
     @Override
-    public ResponseEntity<?> searchRecipesByQuery(String query) {
-        List<Recipe> recipes = recipeService.searchRecipesByQuery(query);
-        return ResponseEntity.ok().body(recipes);
-    }
-
-    @Override
     public ResponseEntity<?> getRecipeById(Long id) {
         Recipe recipe = recipeService.getRecipeById(id);
         return ResponseEntity.ok().body(recipe);
+    }
+
+    @Override
+    public ResponseEntity<?> searchRecipesByQuery(String query) {
+        List<Recipe> recipes = recipeService.searchRecipesByQuery(query);
+        return ResponseEntity.ok().body(recipes);
     }
 }

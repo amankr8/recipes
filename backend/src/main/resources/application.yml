@@ -20,7 +20,7 @@ hibernate:
   search:
     backend:
       type: elasticsearch
-      hosts: http://localhost:9200
+      hosts: http://elasticsearch:9200
       protocol: HTTP
       log:
         json_pretty_printing: true
