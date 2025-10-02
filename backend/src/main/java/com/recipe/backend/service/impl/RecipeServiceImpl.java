@@ -53,8 +53,7 @@ public class RecipeServiceImpl implements RecipeService {
                 .start();
     }
 
-    @Override
-    public void loadRecipes() {
+    private void loadRecipes() {
         ResponseEntity<JsonNode> response = restTemplate.getForEntity(
                 recipesApiUrl, JsonNode.class);
         JsonNode recipesNode = Objects.requireNonNull(response.getBody()).get("recipes");
