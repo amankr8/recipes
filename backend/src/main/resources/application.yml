@@ -21,7 +21,7 @@ hibernate:
     backend:
       type: lucene
       directory:
-          type: local-heap
+          type: local-file-system
           root: ./lucene-indexes
 
 dummyApi:
