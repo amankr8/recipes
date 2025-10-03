@@ -4,11 +4,25 @@ This project consists of a **Spring Boot backend API** and an **Angular frontend
 
 ---
 
+## Running with Docker Compose
+
+You can start both the backend and frontend together using Docker Compose.
+
+1. From the project root, run:
+   ```bash
+   docker-compose up --build
+   ```
+2. The backend API will be available at `http://localhost:8080/`.
+3. The frontend will be available at `http://localhost:4200/`.
+
+---
+
 ## Backend API (Spring Boot)
 
 The backend is a RESTful API built with Spring Boot. It provides endpoints for fetching recipes and allowing search with keywords.
 
 ### Prerequisites
+
 - Java 21
 - Maven
 - Docker (for running with Docker Compose)
@@ -30,16 +44,6 @@ The backend is a RESTful API built with Spring Boot. It provides endpoints for f
 
 The backend will start on `http://localhost:8080/` by default.
 
-### Running with Docker Compose
-
-To run the backend using Docker Compose:
-
-1. From the project root, run:
-   ```bash
-   docker-compose up --build
-   ```
-2. The backend API will be available at `http://localhost:8080/`.
-
 ---
 
 ## API Endpoints (Backend)
@@ -57,6 +61,7 @@ The backend exposes REST endpoints for managing recipes. Example endpoints:
 The frontend is built with Angular CLI version 19.1.0.
 
 ### Prerequisites
+
 - Node.js (v18 or later recommended)
 - npm
 
@@ -81,7 +86,9 @@ The application will automatically reload whenever you modify any of the source 
 ### Building the Frontend
 
 To build the project for production, run:
+
 ```bash
 ng build
 ```
+
 The build artifacts will be stored in the `dist/` directory.
