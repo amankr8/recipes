@@ -6,10 +6,10 @@ This project consists of a **Spring Boot backend API** and an **Angular frontend
 
 ## Backend API (Spring Boot)
 
-The backend is a RESTful API built with Spring Boot. It provides endpoints for managing recipes and integrates with Elasticsearch for search functionality.
+The backend is a RESTful API built with Spring Boot. It provides endpoints for fetching recipes and allowing search with keywords.
 
 ### Prerequisites
-- Java 17 or later
+- Java 21
 - Maven
 - Docker (for running with Docker Compose)
 
