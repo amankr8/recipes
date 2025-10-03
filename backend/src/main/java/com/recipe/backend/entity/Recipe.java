@@ -23,12 +23,15 @@ public class Recipe {
     @Column(name = "r_name")
     private String name;
 
+    @FullTextField
     @Column(name = "r_cuisine")
     private String cuisine;
 
-    @Column
+    @Column(name = "r_cook_time_minutes")
     private Long cookTimeMinutes;
 
-    @Column
+    @ElementCollection
+    @FullTextField
+    @Column(name = "r_tags")
     private List<String> tags;
 }

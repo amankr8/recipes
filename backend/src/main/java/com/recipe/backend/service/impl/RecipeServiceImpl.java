@@ -92,7 +92,7 @@ public class RecipeServiceImpl implements RecipeService {
         SearchSession searchSession = Search.session(entityManager);
         return searchSession.search(Recipe.class)
                 .where(f -> f.simpleQueryString()
-                        .fields("name")
+                        .fields("name", "cuisine", "tags")
                         .matching(query + "*"))
                 .fetchHits(20);
     }
