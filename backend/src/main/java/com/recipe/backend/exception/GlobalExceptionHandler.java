@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleValidationErrors(ConstraintViolationException e) {
         Map<String, String> errors = new HashMap<>();
         e.getConstraintViolations().forEach(cv ->
-            errors.put(cv.getPropertyPath().toString(), cv.getMessage())
+            errors.put("Validation Error: ", cv.getMessage())
         );
         return ResponseEntity.badRequest().body(errors);
     }

@@ -24,5 +24,6 @@ public interface RecipeController {
             @RequestParam
             @NotBlank(message = "Query parameter cannot be blank")
             @Size(min = 3, max = 50, message = "Query must be between 3 and 50 characters")
-            String query);
+            String query
+    );
 }
