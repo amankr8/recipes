@@ -16,16 +16,3 @@ services:
     container_name: recipe_service
     ports:
       - "8080:8080"
-    depends_on:
-      - elasticsearch
-#    environment:
-#      - hibernate.search.backend.hosts=http://elasticsearch:9200
-
-  elasticsearch:
-    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.17.13'
-    container_name: elasticsearch
-    ports:
-      - "9200:9200"
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false

@@ -19,11 +19,10 @@ spring:
 hibernate:
   search:
     backend:
-      type: elasticsearch
-      hosts: http://elasticsearch:9200
-      protocol: HTTP
-      log:
-        json_pretty_printing: true
+      type: lucene
+      directory:
+          type: local-heap
+          root: ./lucene-indexes
 
 dummyApi:
   recipes:

@@ -32,13 +32,23 @@ The backend will start on `http://localhost:8080/` by default.
 
 ### Running with Docker Compose
 
-To run the backend along with Elasticsearch using Docker Compose:
+To run the backend using Docker Compose:
 
 1. From the project root, run:
    ```bash
    docker-compose up --build
    ```
-2. The backend API will be available at `http://localhost:8080/` and Elasticsearch at `http://localhost:9200/`.
+2. The backend API will be available at `http://localhost:8080/`.
+
+---
+
+## API Endpoints (Backend)
+
+The backend exposes REST endpoints for managing recipes. Example endpoints:
+
+- `GET /api/recipes` — List all recipes
+- `GET /api/recipes/{id}` — Get a recipe by ID
+- `GET /api/recipes/search?query=...` — Search recipes by a query string (recipe name)
 
 ---
 
@@ -75,19 +85,3 @@ To build the project for production, run:
 ng build
 ```
 The build artifacts will be stored in the `dist/` directory.
-
----
-
-## API Endpoints (Backend)
-
-The backend exposes REST endpoints for managing recipes. Example endpoints:
-
-- `GET /api/recipes` — List all recipes
-- `GET /api/recipes/{id}` — Get a recipe by ID
-- `GET /api/recipes/search?query=...` — Search recipes by a query string (recipe name)
-
----
-
-## Notes
-- Ensure Elasticsearch is running before starting the backend, or use Docker Compose to manage both services together.
-- Update environment variables as needed in `backend/src/main/resources/application.yml` and `frontend/src/environments/`.
