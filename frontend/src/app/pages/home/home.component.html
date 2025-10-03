@@ -14,6 +14,9 @@
     <button
       (click)="searchRecipes()"
       class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+      [ngClass]="{
+        'opacity-50 cursor-not-allowed': !searchQuery || searchQuery.length < 3
+      }"
     >
       <i class="fa-solid fa-magnifying-glass"></i>
     </button>
@@ -82,7 +85,7 @@
 
   <!-- Recipes Table -->
   <table
-    *ngIf="!loading && !error"
+    *ngIf="!loading && !error && recipes.length > 0"
     class="min-w-full bg-white shadow-md rounded-lg overflow-hidden"
   >
     <thead class="bg-gray-100 text-gray-700 text-left">
@@ -105,11 +108,4 @@
       </tr>
     </tbody>
   </table>
-
-  <div
-    *ngIf="!loading && !error && recipes.length === 0"
-    class="text-gray-500 mt-4"
-  >
-    No recipes found.
-  </div>
 </div>

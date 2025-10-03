@@ -27,10 +27,6 @@ export class HomeComponent {
 
   constructor(private recipeService: RecipeService, private eRef: ElementRef) {}
 
-  ngOnInit() {
-    this.loadUsers();
-  }
-
   @HostListener('document:click', ['$event.target'])
   onClickOutside(targetElement: HTMLElement) {
     const clickedInside =
@@ -38,23 +34,6 @@ export class HomeComponent {
     if (!clickedInside && this.showTagDropdown) {
       this.showTagDropdown = false;
     }
-  }
-
-  loadUsers() {
-    this.loading = true;
-    this.error = '';
-    this.recipeService.getAllRecipes().subscribe({
-      next: (recipes) => {
-        this.recipes = recipes;
-        this.displayedRecipes = [...recipes];
-        this.tags = Array.from(new Set(recipes.map((r) => r.tags).flat()));
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = 'Failed to load recipes.';
-        this.loading = false;
-      },
-    });
   }
 
   searchRecipes() {
@@ -68,12 +47,16 @@ export class HomeComponent {
     this.error = '';
     this.recipeService.searchRecipesByQuery(this.searchQuery).subscribe({
       next: (recipes) => {
+        this.loading = false;
+        this.selectedTag = '';
+        this.sortTimeAsc = null;
         this.recipes = recipes;
         this.displayedRecipes = [...recipes];
         this.tags = Array.from(new Set(recipes.map((r) => r.tags).flat()));
-        this.selectedTag = '';
-        this.sortTimeAsc = null;
-        this.loading = false;
+
+        if (this.recipes.length === 0) {
+          this.error = 'No recipes found.';
+        }
       },
       error: () => {
         this.error = 'Search failed.';
@@ -99,7 +82,9 @@ export class HomeComponent {
     this.searchQuery = '';
     this.selectedTag = '';
     this.sortTimeAsc = null;
-    this.loadUsers();
+    this.recipes = [];
+    this.displayedRecipes = [];
+    this.tags = [];
   }
 
   private applyFiltersAndSort() {

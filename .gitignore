@@ -28,3 +28,6 @@ build/
 # Ignore temporary files
 *.tmp
 *.temporary
+
+# Ignore index files
+/idx_recipe
