@@ -3,80 +3,89 @@
     Recipe List
   </h1>
 
-  <!-- Search Bar -->
-  <div class="flex items-center gap-2 mb-4">
-    <input
-      type="text"
-      [(ngModel)]="searchQuery"
-      placeholder="Search by Recipe Name"
-      class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-    <button
-      (click)="searchRecipes()"
-      class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
-      [ngClass]="{
-        'opacity-50 cursor-not-allowed': !searchQuery || searchQuery.length < 3
-      }"
-    >
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
-    <div class="relative" #dropdownRef>
+  <div class="flex flex-col gap-2 mb-4">
+    <!-- Search Bar -->
+    <div class="flex items-center gap-2 mb-2">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Search by Recipe Name"
+        class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
       <button
-        class="flex items-center justify-between w-36 gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 transition"
-        (click)="showTagDropdown = !showTagDropdown"
+        (click)="searchRecipes()"
+        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+        [ngClass]="{
+          'opacity-50 cursor-not-allowed':
+            !searchQuery || searchQuery.length < 3
+        }"
       >
-        {{ selectedTag || "All Tags" }}
-        <i
-          class="fa-solid text-sm text-gray-500"
-          [ngClass]="{
-            'fa-chevron-down': !showTagDropdown,
-            'fa-chevron-up': showTagDropdown
-          }"
-        ></i>
+        <i class="fa-solid fa-magnifying-glass"></i>
       </button>
-
-      <div
-        *ngIf="showTagDropdown"
-        class="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-48 overflow-y-auto"
-      >
-        <div
-          (click)="selectedTag = ''; filterByTag(); showTagDropdown = false"
-          class="px-4 py-2 hover:bg-gray-100 text-gray-700 cursor-pointer"
-        >
-          All Tags
-        </div>
-        <div
-          *ngFor="let tag of tags"
-          (click)="selectedTag = tag; filterByTag(); showTagDropdown = false"
-          class="px-4 py-2 hover:bg-gray-100 text-gray-700 cursor-pointer"
-        >
-          {{ tag }}
-        </div>
-      </div>
     </div>
 
-    <button
-      (click)="sortByCookTime()"
-      class="bg-blue-600 w-25 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center justify-between"
-    >
-      <span>Time</span>
-      <i
-        [class]="
-          sortTimeAsc === null
-            ? 'fa-solid fa-arrows-up-down'
-            : sortTimeAsc
-            ? 'fa-solid fa-arrow-up'
-            : 'fa-solid fa-arrow-down'
-        "
-      ></i>
-    </button>
+    <!-- Filters -->
+    <div class="flex items-center justify-between">
+      <div class="relative" #dropdownRef>
+        <button
+          class="flex items-center justify-between w-50 gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 transition"
+          (click)="showTagDropdown = !showTagDropdown"
+        >
+          {{ selectedTag || "All Tags" }}
+          <i
+            class="fa-solid text-sm text-gray-500"
+            [ngClass]="{
+              'fa-chevron-down': !showTagDropdown,
+              'fa-chevron-up': showTagDropdown
+            }"
+          ></i>
+        </button>
 
-    <button
-      (click)="resetFilters()"
-      class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition"
-    >
-      Reset
-    </button>
+        <div
+          *ngIf="showTagDropdown"
+          class="absolute z-10 mt-2 w-50 bg-white border border-gray-200 rounded-md shadow-lg max-h-48 overflow-y-auto"
+        >
+          <div
+            (click)="selectedTag = ''; filterByTag(); showTagDropdown = false"
+            class="px-4 py-2 hover:bg-gray-100 text-gray-700 cursor-pointer"
+          >
+            All Tags
+          </div>
+          <div
+            *ngFor="let tag of tags"
+            (click)="selectedTag = tag; filterByTag(); showTagDropdown = false"
+            class="px-4 py-2 hover:bg-gray-100 text-gray-700 cursor-pointer"
+          >
+            {{ tag }}
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button
+          (click)="sortByCookTime()"
+          class="bg-blue-600 w-25 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center justify-between"
+        >
+          <span>Time</span>
+          <i
+            [class]="
+              sortTimeAsc === null
+                ? 'fa-solid fa-arrows-up-down'
+                : sortTimeAsc
+                ? 'fa-solid fa-arrow-up'
+                : 'fa-solid fa-arrow-down'
+            "
+          ></i>
+        </button>
+
+        <button
+          (click)="resetFilters()"
+          class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition w-25"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Loading and Error -->
