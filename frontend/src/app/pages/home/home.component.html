@@ -1,6 +1,6 @@
 <div class="p-6 max-w-4xl mx-auto">
   <h1 class="text-2xl w-full flex justify-center font-bold mb-4 text-gray-800">
-    Recipe List
+    Search Recipes
   </h1>
 
   <div class="flex flex-col gap-2 mb-4">
@@ -25,8 +25,8 @@
     </div>
 
     <!-- Filters -->
-    <div class="flex items-center justify-between">
-      <div class="relative" #dropdownRef>
+    <div class="flex items-center justify-between gap-2">
+      <div class="relative w-1/2" #dropdownRef>
         <button
           class="flex items-center justify-between w-full gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 transition"
           (click)="showTagDropdown = !showTagDropdown"
@@ -61,10 +61,10 @@
         </div>
       </div>
 
-      <div class="flex gap-2">
+      <div class="flex gap-2 w-1/2">
         <button
           (click)="sortByCookTime()"
-          class="bg-blue-600 w-full text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center justify-between"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center justify-between w-1/2"
         >
           <span>Time</span>
           <i
@@ -80,7 +80,7 @@
 
         <button
           (click)="resetFilters()"
-          class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition w-25"
+          class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition w-1/2"
         >
           Reset
         </button>
@@ -99,10 +99,10 @@
   >
     <thead class="bg-gray-100 text-gray-700 text-left">
       <tr>
-        <th class="py-3 px-5">ID</th>
-        <th class="py-3 px-5">Name</th>
-        <th class="py-3 px-5">Cuisine</th>
-        <th class="py-3 px-5">Cook Time</th>
+        <th class="py-3 px-5 w-[10%]">ID</th>
+        <th class="py-3 px-5 w-[40%]">Name</th>
+        <th class="py-3 px-5 w-[30%]">Cuisine</th>
+        <th class="py-3 px-5 w-[20%]">Cook Time</th>
       </tr>
     </thead>
     <tbody>
@@ -110,10 +110,10 @@
         *ngFor="let recipe of displayedRecipes"
         class="hover:bg-gray-50 transition-colors duration-200"
       >
-        <td class="py-3 px-5">{{ recipe.id }}</td>
-        <td class="py-3 px-5">{{ recipe.name }}</td>
-        <td class="py-3 px-5">{{ recipe.cuisine }}</td>
-        <td class="py-3 px-5">{{ recipe.cookTimeMinutes }}</td>
+        <td class="py-3 px-5 w-[10%]">{{ recipe.id }}</td>
+        <td class="py-3 px-5 w-[40%]">{{ recipe.name }}</td>
+        <td class="py-3 px-5 w-[30%]">{{ recipe.cuisine }}</td>
+        <td class="py-3 px-5 w-[20%]">{{ recipe.cookTimeMinutes }}</td>
       </tr>
     </tbody>
   </table>
