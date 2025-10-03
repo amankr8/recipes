@@ -1,9 +1,11 @@
 package com.recipe.backend.controller.impl;
 
 import com.recipe.backend.entity.Recipe;
+import com.recipe.backend.exception.ResourceNotFoundException;
 import com.recipe.backend.service.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -16,7 +18,7 @@ import java.util.Collections;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-@WebMvcTest(RecipeControllerImpl.class)
+@WebMvcTest(controllers = RecipeControllerImpl.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
 class RecipeControllerImplTest {
 
     @Autowired
@@ -58,7 +60,7 @@ class RecipeControllerImplTest {
 
     @Test
     void getRecipeById_shouldReturn404_whenNotFound() throws Exception {
-        when(recipeService.getRecipeById(anyLong())).thenThrow(new RuntimeException("Recipe not found"));
+        when(recipeService.getRecipeById(anyLong())).thenThrow(new ResourceNotFoundException("Recipe not found"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/recipes/99"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
