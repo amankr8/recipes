@@ -40,9 +40,10 @@ public class RecipeServiceImpl implements RecipeService {
             if (recipeRepository.count() == 0) {
                 loadRecipes();
                 reindex();
+                log.info("Recipes loaded and indexed successfully.");
             }
         } catch (Exception e) {
-            log.warn("Failed to load users on startup", e);
+            log.warn("Failed to load or index recipes: {}", e.getMessage());
         }
     }
 
