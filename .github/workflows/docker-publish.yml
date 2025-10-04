@@ -1,0 +1,45 @@
+# Workflow to build and publish Docker images for frontend and backend
+name: Build and Publish Docker Images
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    env:
+      FRONTEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/recipes-frontend
+      BACKEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/recipes-backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.FRONTEND_IMAGE }}:latest
+            ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.BACKEND_IMAGE }}:latest
+            ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+
