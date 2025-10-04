@@ -1,5 +1,6 @@
 package com.recipe.backend.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping(("/api/recipes"))
 @Validated
+@Tag(name = "Recipe APIs", description = "Endpoints for fetching recipes")
 public interface RecipeController {
 
     @GetMapping
