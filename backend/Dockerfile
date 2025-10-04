@@ -1,4 +1,3 @@
-# Dockerfile
 FROM openjdk:21-jdk-slim AS build
 COPY . .
 RUN ./mvnw clean package -DskipTests
