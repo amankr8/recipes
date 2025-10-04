@@ -20,9 +20,6 @@ hibernate:
   search:
     backend:
       type: lucene
-      directory:
-          type: local-file-system
-          root: ./lucene-indexes
 
 dummyApi:
   recipes:
