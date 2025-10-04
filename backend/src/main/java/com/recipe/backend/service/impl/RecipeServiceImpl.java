@@ -7,10 +7,9 @@ import com.recipe.backend.repository.RecipeRepository;
 import com.recipe.backend.service.RecipeService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.search.mapper.orm.Search;
 import org.hibernate.search.mapper.orm.session.SearchSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,10 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class RecipeServiceImpl implements RecipeService {
-    private static final Logger logger = LoggerFactory.getLogger(RecipeServiceImpl.class);
     private final RecipeRepository recipeRepository;
     private final RestTemplate restTemplate;
 
@@ -43,7 +42,7 @@ public class RecipeServiceImpl implements RecipeService {
                 reindex();
             }
         } catch (Exception e) {
-            logger.warn("Failed to load users on startup", e);
+            log.warn("Failed to load users on startup", e);
         }
     }
 

@@ -16,6 +16,12 @@ spring:
     console:
       enabled: true
 
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+
 hibernate:
   search:
     backend:
