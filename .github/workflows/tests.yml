@@ -1,15 +1,13 @@
-name: Backend CI - Unit Tests with Reports
+name: Maven CI - Unit Tests with Reports
 
 on:
   push:
     branches:
       - main
-      - develop
-      - feature/**
   pull_request:
 
 jobs:
-  backend-tests:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,3 +31,17 @@ jobs:
       - name: Run Tests with Coverage
         working-directory: backend
         run: mvn -B clean verify
+
+      # Upload JUnit test results
+      - name: Upload JUnit Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-results
+          path: target/surefire-reports/*.xml
+
+      # Upload JaCoCo coverage report
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/index.html
