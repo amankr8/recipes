@@ -5,6 +5,7 @@ on:
     branches:
       - main
   pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
@@ -34,14 +35,14 @@ jobs:
 
       # Upload JUnit test results
       - name: Upload JUnit Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: junit-results
           path: target/surefire-reports/*.xml
 
       # Upload JaCoCo coverage report
       - name: Upload Coverage Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: target/site/jacoco/index.html
