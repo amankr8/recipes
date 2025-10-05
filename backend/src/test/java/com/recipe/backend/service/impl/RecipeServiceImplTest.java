@@ -24,11 +24,12 @@ class RecipeServiceImplTest {
     @Mock
     private RestTemplate restTemplate;
 
-    @InjectMocks private RecipeServiceImpl recipeService;
+    @InjectMocks
+    private RecipeServiceImpl recipeService;
 
     private Recipe createRecipe(Long id, String name) {
         Recipe r = new Recipe();
-        r.setId(1L);
+        r.setId(id);
         r.setName(name);
         r.setCookTimeMinutes(30L);
         r.setTags(List.of("Easy", "Test"));
