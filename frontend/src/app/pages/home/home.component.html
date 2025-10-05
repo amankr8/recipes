@@ -92,7 +92,9 @@
   </div>
 
   <!-- Loading and Error -->
-  <div *ngIf="loading" class="text-blue-500">Loading recipes...</div>
+  <div *ngIf="loading" class="text-blue-500">
+    Searching for recipes... Hang tight!
+  </div>
   <div *ngIf="error" class="text-red-500">{{ error }}</div>
 
   <!-- Recipes Table -->
