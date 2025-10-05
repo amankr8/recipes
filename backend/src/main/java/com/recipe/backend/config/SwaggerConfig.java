@@ -22,7 +22,10 @@ public class SwaggerConfig {
                 List.of(
                     new Server()
                         .url("http://localhost:8080")
-                        .description("Local Server")
+                        .description("Local Server"),
+                    new Server()
+                        .url("https://recipe-service-tcl5.onrender.com")
+                        .description("Production Server")
                 )
         );
     }
