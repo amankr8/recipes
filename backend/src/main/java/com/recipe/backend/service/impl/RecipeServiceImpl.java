@@ -91,9 +91,10 @@ public class RecipeServiceImpl implements RecipeService {
     public List<Recipe> searchRecipesByQuery(String query) {
         SearchSession searchSession = Search.session(entityManager);
         return searchSession.search(Recipe.class)
-                .where(f -> f.simpleQueryString()
+                .where(f -> f.wildcard()
                         .fields("name", "cuisine", "tags")
-                        .matching(query + "*"))
+                        .matching("*" + query.toLowerCase() + "*")
+                )
                 .fetchHits(20);
     }
 }
